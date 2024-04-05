@@ -1,0 +1,207 @@
+.app {
+  display: flex;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  position: relative; /* Add position relative to enable positioning of the sidebar */
+  padding: 0; /* Remove padding to remove the gap */
+  margin: 0%;
+  height: 100vh;
+}
+
+/* Dark mode styles */
+.app.dark-mode {
+  background-color: #1f1f1f; /* Update with your dark mode background color */
+  color: #fff; /* Update with your dark mode text color */
+}
+
+.sidebar {
+  padding: 20px;
+  border-right: 1px solid #ccc;
+}
+
+.sidebar button {
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.new-file {
+  padding: 4px 20px;
+  cursor: pointer;
+}
+
+.sidebar button:hover {
+  background-color: #357bd8;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar li {
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.sidebar li:hover {
+  background-color: none;
+}
+
+/* .sidebar .selected {
+  background-color: #b3d4fc;
+} */
+
+.files-sidebar {
+  padding: 20px;
+  width: 100px;
+}
+
+.files-sidebar button {
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.files-sidebar button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.files-sidebar ul {
+  list-style-type: none;
+}
+.files-sidebar li {
+  padding: 0;
+  margin: 0;
+}
+.filesidedown {
+  padding: 0;
+  margin: 0;
+}
+.filesidedown ul {
+  margin-top: 15px;
+  padding: 0;
+}
+.filesidedown li {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.editor {
+  flex: 1;
+  padding: 20px;
+  border-left: 1px solid #ccc;
+  margin-right: 20px;
+}
+
+input[type="text"],
+textarea {
+  width: calc(100% - 0px);
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.dark-mode .editor-textarea {
+  background-color: #141414;
+  color: #fff;
+}
+.dark-mode .input-textarea {
+  background-color: #141414;
+  color: #fff;
+}
+.iconsize {
+  font-size: 20px;
+  cursor: pointer;
+}
+textarea {
+  height: calc(100% - 50px);
+  resize: none;
+}
+
+/* New styles for the bottom left sidebar */
+.sidebar-bottom-left {
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  display: flex;
+  flex-direction: row;
+}
+
+.sidebar-icons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bin-icon,
+.settings-icon {
+  font-size: 20px;
+  cursor: pointer;
+  padding: 10px;
+}
+
+/* .bin-icon:hover,
+.settings-icon:hover {
+  color: #000000;
+} */
+
+/* App.css */
+
+.context-menu-modal {
+  position: absolute;
+  background-color: #f4f4f4;
+  border: 1px solid #ccc;
+  padding: 8px;
+  border-radius: 10%;
+  z-index: 1000; /* Ensure it appears above other elements */
+}
+
+.context-menu-item {
+  background-color: #ffffff;
+  border: none;
+  padding: 5px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 5px;
+  border: 1px solid #bcbcbc;
+  transition: background-color 0.3s;
+}
+
+.context-menu-item:hover {
+  background-color: #f0f0f0;
+}
+
+/* search bar css*/
+
+.search-bar li {
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.profile {
+  background-color: #4a90e2;
+  padding: 10px;
+}
+
+
