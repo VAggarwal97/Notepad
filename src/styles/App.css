@@ -1,5 +1,3 @@
-/* src/styles/App.css */
-
 /* ------------------------
    Global App Styles
 ------------------------ */
@@ -12,7 +10,6 @@
   overflow: hidden;
 }
 
-/* Dark Mode */
 .app.dark-mode {
   background-color: #1e1e1e;
   color: #e0e0e0;
@@ -22,7 +19,7 @@
    Sidebar (Left)
 ------------------------ */
 .sidebar {
-  width: 240px;
+  width: 240px; /* fixed sidebar width */
   background-color: #ffffff;
   border-right: 1px solid #ccc;
   display: flex;
@@ -36,23 +33,47 @@
   border-color: #444;
 }
 
-/* Search bar */
-.search-bar input {
+/* Sidebar Elements Common Width */
+.sidebar input,
+.sidebar button {
+  width: 100%; /* full width */
+  box-sizing: border-box;
+}
+
+/* Search Bar */
+.search-bar {
   width: 100%;
-  padding: 8px 10px;
   margin-bottom: 10px;
+}
+
+.search-input {
+  height: 34px;
+  padding: 0 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 14px;
+  outline: none;
+  transition: all 0.2s ease;
+  background: #fff;
+  color: #333;
 }
 
-.app.dark-mode .search-bar input {
-  background-color: #3a3a3a;
+.search-input:focus {
+  border-color: #6a5acd;
+  box-shadow: 0 0 4px rgba(106, 90, 205, 0.3);
+}
+
+.search-input.dark {
+  background: #2f2f2f;
   border-color: #555;
   color: #eee;
 }
 
-/* Folder list */
+.search-input.dark::placeholder {
+  color: #bbb;
+}
+
+/* Folder List */
 .sidebar ul {
   list-style: none;
   padding: 0;
@@ -60,13 +81,12 @@
 }
 
 .sidebar ul li {
-  padding: 6px 8px;
-  margin-bottom: 5px;
-  border-radius: 5px;
+  padding: 5px 0;
+  margin-bottom: 6px;
+  border-radius: 4px;
   cursor: pointer;
   display: flex;
   align-items: center;
-  justify-content: space-between;
 }
 
 .sidebar ul li.selected {
@@ -74,24 +94,32 @@
 }
 
 .app.dark-mode .sidebar ul li.selected {
-  background-color: #3a5f7f;
+  background-color: #7d7d7d;
 }
 
+/* Folder input inside li */
 .sidebar ul li input {
-  border: none;
-  background: transparent;
-  width: 100%;
-  color: inherit;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 4px 8px;
   font-size: 14px;
+  width: 100%;
+  background: #fff;
+  color: #333;
 }
 
-/* Buttons */
+.app.dark-mode .sidebar ul li input {
+  background: #2f2f2f;
+  border-color: #555;
+  color: #eee;
+}
+
+/* Sidebar Buttons */
 .sidebar button {
-  width: 100%;
   padding: 8px;
   margin-bottom: 10px;
   background-color: #007bff;
-  color: white;
+  color: #fff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -102,7 +130,26 @@
   background-color: #0056b3;
 }
 
-/* Context Menu */
+/* Content Search Input */
+.sidebar > div > input.input-textarea {
+  margin-top: 10px;
+  padding: 6px 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  width: 100%; /* full width */
+  box-sizing: border-box;
+}
+
+.app.dark-mode .sidebar > div > input.input-textarea {
+  background: #2f2f2f;
+  border-color: #555;
+  color: #eee;
+}
+
+/* ----------------------------
+   Context Menu
+---------------------------- */
 .context-menu-modal {
   position: absolute;
   background-color: #fff;
@@ -119,7 +166,7 @@
   color: #eee;
 }
 
-/* Sidebar bottom icons */
+/* Sidebar Bottom Icons */
 .sidebar-bottom-left {
   margin-top: auto;
 }
@@ -139,7 +186,7 @@
    Files Sidebar (Middle)
 ------------------------ */
 .files-sidebar {
-  width: 220px;
+  width: 200px; /* Match main sidebar width */
   border-right: 1px solid #ccc;
   padding: 10px;
   overflow-y: auto;
@@ -151,23 +198,25 @@
   border-color: #444;
 }
 
-/* New file button */
+/* New File Button */
 .new-file {
-  padding: 6px 10px;
-  margin-bottom: 8px;
-  background-color: #28a745;
+  padding: 8px; /* same padding as sidebar buttons */
+  margin-bottom: 10px;
+  background-color: #007bff;
   color: white;
   text-align: center;
   border-radius: 5px;
   cursor: pointer;
   font-weight: 600;
+  width: 100%; /* full width */
+  box-sizing: border-box;
 }
 
 .new-file:hover {
-  background-color: #1e7e34;
+  background-color: #0056b3;
 }
 
-/* File list */
+/* Files List */
 .filesidedown ul {
   list-style: none;
   padding: 0;
@@ -175,14 +224,15 @@
 }
 
 .filesidedown li {
-  padding: 6px 8px;
-  margin-bottom: 5px;
+  padding: 6px 0;
+  margin-bottom: 10px;
   border-radius: 5px;
   cursor: pointer;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column; /* stack input + buttons */
   background-color: #fff;
+  width: 100%; /* full width */
+  box-sizing: border-box;
 }
 
 .app.dark-mode .filesidedown li {
@@ -195,49 +245,71 @@
 }
 
 .app.dark-mode .filesidedown li.selected {
-  background-color: #3a5f7f;
+  background-color: #4d4d4d;
 }
 
-.file-actions button {
-  margin-left: 4px;
-  padding: 2px 6px;
+/* File Name Input */
+.filesidedown li input {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 4px 8px;
+  font-size: 14px;
+  width: 100%;
+  background: #fff;
+  color: #333;
+  box-sizing: border-box;
+}
+
+.app.dark-mode .filesidedown li input {
+  background: #2f2f2f;
+  border-color: #555;
+  color: #eee;
+}
+
+/* File Action Buttons (TXT / MD / PDF / Del) */
+.file-actions-under {
+  margin-top: 4px;
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.file-actions-under button {
+  padding: 4px 6px;
   border: none;
   border-radius: 3px;
   cursor: pointer;
   font-size: 12px;
+  flex: 1; /* buttons share width equally */
 }
 
-.file-actions button:hover {
+.file-actions-under button:hover {
   opacity: 0.8;
 }
 
 /* ------------------------
    Editor (Right)
 ------------------------ */
-/* Make the editor container fill all available height */
-/* Editor wrapper takes full vertical space */
 .editor {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
   padding: 16px;
-  height: 100%; /* ensure it fills available height */
+  height: 100%;
   overflow: hidden;
 }
 
-/* Editor container */
 .editor-container {
-  flex-grow: 1; /* stretches container */
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
-  min-height: 0; /* ensures flex container respects height */
+  min-height: 0;
 }
 
-/* Actual editor content */
 .editor-container .ProseMirror {
-  flex-grow: 1; /* stretches the editable area */
-  min-height: 600px; /* Increase this to make editor taller */
-  overflow-y: auto; /* scroll if content exceeds height */
+  flex-grow: 1;
+  min-height: 600px;
+  overflow-y: auto;
   padding: 12px;
   border: 1px solid #ccc;
   border-radius: 6px;
@@ -251,7 +323,7 @@
 }
 
 /* ------------------------
-   Search results
+   Search Results
 ------------------------ */
 .search-results {
   max-height: 150px;
@@ -272,4 +344,34 @@
 
 .app.dark-mode .search-result:hover {
   background-color: #3a5f7f;
+}
+
+/* ------------------------
+   Scrollbar Styling
+------------------------ */ /* Hide default scrollbar */
+.files-sidebar::-webkit-scrollbar {
+  width: 8px; /* width of the scrollbar */
+}
+
+.files-sidebar::-webkit-scrollbar-track {
+  background: transparent; /* optional: transparent track */
+}
+
+.files-sidebar::-webkit-scrollbar-thumb {
+  background-color: #888; /* scrollbar color */
+  border-radius: 4px;
+}
+
+.files-sidebar::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+/* Firefox */
+.files-sidebar {
+  scrollbar-width: none;
+  /* scrollbar-color: #888 transparent; */
+}
+.sidebar {
+  scrollbar-width: none;
+  /* scrollbar-color: #888 transparent; */
 }

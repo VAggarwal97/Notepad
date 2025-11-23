@@ -6,9 +6,9 @@ import Bin from './Bin';
 import ContextMenuModal from './ContextMenuModal';
 import Editor from './Editor';
 
-import TurndownService from 'turndown';
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
+// import TurndownService from 'turndown';
+// import jsPDF from 'jspdf';
+// import html2canvas from 'html2canvas';
 
 
 
@@ -219,53 +219,53 @@ function App() {
     return tmp.textContent || tmp.innerText || '';
   };
 
-  const downloadUrl = (url, filename) => {
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = filename;
-    a.click();
-  };
+  // const downloadUrl = (url, filename) => {
+  //   const a = document.createElement('a');
+  //   a.href = url;
+  //   a.download = filename;
+  //   a.click();
+  // };
 
-  const exportAsTxt = (file) => {
-    const text = stripHtml(file.content || '');
-    const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    downloadUrl(url, `${file.name || 'document'}.txt`);
-    URL.revokeObjectURL(url);
-  };
+  // const exportAsTxt = (file) => {
+  //   const text = stripHtml(file.content || '');
+  //   const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+  //   const url = URL.createObjectURL(blob);
+  //   downloadUrl(url, `${file.name || 'document'}.txt`);
+  //   URL.revokeObjectURL(url);
+  // };
 
-  const exportAsMarkdown = (file) => {
-    const turndownService = new TurndownService();
-    const markdown = turndownService.turndown(file.content || '');
-    const blob = new Blob([markdown], { type: 'text/markdown;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    downloadUrl(url, `${file.name || 'document'}.md`);
-    URL.revokeObjectURL(url);
-  };
+  // const exportAsMarkdown = (file) => {
+  //   const turndownService = new TurndownService();
+  //   const markdown = turndownService.turndown(file.content || '');
+  //   const blob = new Blob([markdown], { type: 'text/markdown;charset=utf-8' });
+  //   const url = URL.createObjectURL(blob);
+  //   downloadUrl(url, `${file.name || 'document'}.md`);
+  //   URL.revokeObjectURL(url);
+  // };
 
-  const exportAsPdf = async (file) => {
-    const wrapper = document.createElement('div');
-    wrapper.style.width = '800px';
-    wrapper.style.padding = '24px';
-    wrapper.style.background = '#fff';
-    wrapper.innerHTML = file.content || '<div></div>';
-    document.body.appendChild(wrapper);
+  // const exportAsPdf = async (file) => {
+  //   const wrapper = document.createElement('div');
+  //   wrapper.style.width = '800px';
+  //   wrapper.style.padding = '24px';
+  //   wrapper.style.background = '#fff';
+  //   wrapper.innerHTML = file.content || '<div></div>';
+  //   document.body.appendChild(wrapper);
 
-    try {
-      const canvas = await html2canvas(wrapper, { scale: 2 });
-      const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF('p', 'pt', 'a4');
-      const imgProps = pdf.getImageProperties(imgData);
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-      pdf.save(`${file.name || 'document'}.pdf`);
-    } catch (err) {
-      console.error('PDF export error', err);
-    } finally {
-      document.body.removeChild(wrapper);
-    }
-  };
+  //   try {
+  //     const canvas = await html2canvas(wrapper, { scale: 2 });
+  //     const imgData = canvas.toDataURL('image/png');
+  //     const pdf = new jsPDF('p', 'pt', 'a4');
+  //     const imgProps = pdf.getImageProperties(imgData);
+  //     const pdfWidth = pdf.internal.pageSize.getWidth();
+  //     const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+  //     pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+  //     pdf.save(`${file.name || 'document'}.pdf`);
+  //   } catch (err) {
+  //     console.error('PDF export error', err);
+  //   } finally {
+  //     document.body.removeChild(wrapper);
+  //   }
+  // };
 
   /* -----------------------------
      Full-text search across contents
@@ -290,18 +290,17 @@ function App() {
       {/* SIDEBAR */}
       <div className="sidebar">
         <div className="search-bar">
-          <li>
-            <input
-              className={`input-textarea ${darkMode ? 'dark-mode-textarea' : ''}`}
-              type="text"
-              placeholder="Search folders/files..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-          </li>
+          <input
+            className={`search-input ${darkMode ? "dark" : ""}`}
+            type="text"
+            placeholder="Search folders/files..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
         </div>
 
-        <button onClick={handleNewFolder}>New Folder</button>
+
+        <button className='folderbtn' onClick={handleNewFolder}>New Folder</button>
 
         <ul>
           {folders.map((folder, index) => (
@@ -388,16 +387,17 @@ function App() {
                       value={file.name}
                       onChange={(e) => handleFileNameChange(e, index)}
                     />
-                    <div className="file-actions">
-                      <button onClick={(ev) => { ev.stopPropagation(); exportAsTxt(file); }}>TXT</button>
-                      <button onClick={(ev) => { ev.stopPropagation(); exportAsMarkdown(file); }}>MD</button>
-                      <button onClick={(ev) => { ev.stopPropagation(); exportAsPdf(file); }}>PDF</button>
-                      <button onClick={(ev) => { ev.stopPropagation(); handleDeleteFile(index); }}>Del</button>
-                    </div>
+                    {/* <div className="file-actions file-actions-under"> */}
+                    {/* <button onClick={(ev) => { ev.stopPropagation(); exportAsTxt(file); }}>TXT</button> */}
+                    {/* <button onClick={(ev) => { ev.stopPropagation(); exportAsMarkdown(file); }}>MD</button> */}
+                    {/* <button onClick={(ev) => { ev.stopPropagation(); exportAsPdf(file); }}>PDF</button> */}
+                    {/* <button onClick={(ev) => { ev.stopPropagation(); handleDeleteFile(index); }}>Del</button> */}
+                    {/* </div> */}
                   </li>
                 ))}
               </ul>
             </div>
+
           </>
         )}
       </div>

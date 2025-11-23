@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
@@ -13,8 +13,6 @@ import HighlightSearch from "./extensions/HighlightSearch";
 import Toolbar from "./Toolbar";
 import "./styles/editor.css";
 
-
-
 export default function Editor({
     content,
     onUpdate,
@@ -25,6 +23,8 @@ export default function Editor({
     const [charCount, setCharCount] = useState(0);
     const [setSearchQuery] = useState("");
     const [versions, setVersions] = useState([]);
+
+    const detailsRef = useRef(null); // Reference for drop-up details
 
     const editor = useEditor({
         extensions: [
@@ -63,6 +63,17 @@ export default function Editor({
             editor.commands.setContent(content || "<p></p>", false);
         }
     }, [content, editor]);
+
+    // Handle click outside to close drop-up
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (detailsRef.current && !detailsRef.current.contains(event.target)) {
+                detailsRef.current.open = false;
+            }
+        };
+        document.addEventListener("click", handleClickOutside);
+        return () => document.removeEventListener("click", handleClickOutside);
+    }, []);
 
     const createSnapshot = useCallback(() => {
         if (!editor) return;
@@ -163,13 +174,15 @@ export default function Editor({
                 <div>Words: {wordCount} • Chars: {charCount}</div>
                 <div className="snapshot-quick">
                     <button onClick={createSnapshot}>Save Snapshot</button>
-                    <details>
+                    <details ref={detailsRef}>
                         <summary>Snapshots ({versions.length})</summary>
                         <div className="snapshots-list">
                             {versions.map((v) => (
                                 <div key={v.ts} className="snapshot-item">
                                     <small>{new Date(v.ts).toLocaleString()}</small>
-                                    <div><button onClick={() => restoreSnapshot(v.ts)}>Restore</button></div>
+                                    <div>
+                                        <button onClick={() => restoreSnapshot(v.ts)}>Restore</button>
+                                    </div>
                                 </div>
                             ))}
                         </div>
