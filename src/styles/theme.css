@@ -1,0 +1,30 @@
+/* src/styles/theme.css */
+:root {
+  --bg-light: #ffffff;
+  --text-light: #111827;
+  --muted-light: #6b7280;
+  --bg-dark: #071022;
+  --text-dark: #e6eef8;
+  --bg-sepia: #f4ecd8;
+  --text-sepia: #5b4636;
+  --bg-solar: #fdf6e3;
+  --text-solar: #657b83;
+}
+
+/* You can attach these classes to <div className={`app theme-${theme}`}> */
+.theme-light {
+  background: var(--bg-light);
+  color: var(--text-light);
+}
+.theme-dark {
+  background: var(--bg-dark);
+  color: var(--text-dark);
+}
+.theme-sepia {
+  background: var(--bg-sepia);
+  color: var(--text-sepia);
+}
+.theme-solarized {
+  background: var(--bg-solar);
+  color: var(--text-solar);
+}

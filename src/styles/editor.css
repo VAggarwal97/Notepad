@@ -1,0 +1,103 @@
+/* Root editor container */
+.tiptap-editor {
+  display: flex;
+  flex-direction: column;
+  height: 90%;
+}
+
+/* Dark/Light Mode */
+.tiptap-editor.light {
+  background-color: #fff;
+  color: #333;
+}
+
+.tiptap-editor.dark {
+  background-color: #1e1e1e;
+  color: #eee;
+}
+
+/* Toolbar is fixed height */
+.tiptap-editor .editor-toolbar {
+  flex-shrink: 0;
+}
+
+/* Editor container fills remaining space */
+.editor-container-fixed {
+  flex-grow: 1; /* takes remaining vertical space */
+  min-height: 0; /* required for proper flexbox scrolling */
+  overflow-y: auto;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  background-color: #fff;
+}
+
+.tiptap-editor.dark .editor-container-fixed {
+  background-color: #2b2b2b;
+  border-color: #555;
+}
+
+/* TipTap content area */
+.editor-container-fixed .ProseMirror {
+  min-height: 100%;
+  outline: none;
+}
+
+/* Footer with word/char count and snapshots */
+.editor-footer {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  padding: 6px 10px;
+  border-top: 1px solid #ccc;
+}
+
+.tiptap-editor.dark .editor-footer {
+  border-color: #555;
+}
+
+/* Snapshot quick access */
+.snapshot-quick button {
+  margin-right: 6px;
+  padding: 4px 8px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+.snapshot-quick button:hover {
+  background-color: #0056b3;
+}
+
+.snapshots-list {
+  max-height: 150px;
+  overflow-y: auto;
+  padding: 4px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
+
+.tiptap-editor.dark .snapshots-list {
+  background-color: #333;
+  border-color: #555;
+  color: #eee;
+}
+
+.snapshot-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px 4px;
+  border-bottom: 1px solid #ddd;
+}
+
+.tiptap-editor.dark .snapshot-item {
+  border-bottom-color: #555;
+}
