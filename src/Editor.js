@@ -153,40 +153,42 @@ export default function Editor({
     }, [editor, setSearchQuery]);
 
     return (
-        <div className={`tiptap-editor ${darkMode ? "dark" : "light"}`}>
-            <Toolbar
-                editor={editor}
-                insertImage={insertImageFromFile}
-                insertTable={() => insertTable(3, 3)}
-                exportTXT={exportAsTxt}
-                exportMD={exportAsMarkdown}
-                highlightAllMatches={highlightAllMatches}
-                createSnapshot={createSnapshot}
-                restoreSnapshot={restoreSnapshot}
-                versions={versions}
-            />
+        <div className="editor-wrapper">
+            <div className={`tiptap-editor ${darkMode ? "dark" : "light"}`}>
+                <Toolbar
+                    editor={editor}
+                    insertImage={insertImageFromFile}
+                    insertTable={() => insertTable(3, 3)}
+                    exportTXT={exportAsTxt}
+                    exportMD={exportAsMarkdown}
+                    highlightAllMatches={highlightAllMatches}
+                    createSnapshot={createSnapshot}
+                    restoreSnapshot={restoreSnapshot}
+                    versions={versions}
+                />
 
-            <div className="editor-container-fixed">
-                <EditorContent editor={editor} />
-            </div>
+                <div className="editor-container-fixed">
+                    <EditorContent editor={editor} />
+                </div>
 
-            <div className="editor-footer">
-                <div>Words: {wordCount} • Chars: {charCount}</div>
-                <div className="snapshot-quick">
-                    <button onClick={createSnapshot}>Save Snapshot</button>
-                    <details ref={detailsRef}>
-                        <summary>Snapshots ({versions.length})</summary>
-                        <div className="snapshots-list">
-                            {versions.map((v) => (
-                                <div key={v.ts} className="snapshot-item">
-                                    <small>{new Date(v.ts).toLocaleString()}</small>
-                                    <div>
-                                        <button onClick={() => restoreSnapshot(v.ts)}>Restore</button>
+                <div className="editor-footer">
+                    <div>Words: {wordCount} • Chars: {charCount}</div>
+                    <div className="snapshot-quick">
+                        <button onClick={createSnapshot}>Save Snapshot</button>
+                        <details ref={detailsRef}>
+                            <summary>Snapshots ({versions.length})</summary>
+                            <div className="snapshots-list">
+                                {versions.map((v) => (
+                                    <div key={v.ts} className="snapshot-item">
+                                        <small>{new Date(v.ts).toLocaleString()}</small>
+                                        <div>
+                                            <button onClick={() => restoreSnapshot(v.ts)}>Restore</button>
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
-                        </div>
-                    </details>
+                                ))}
+                            </div>
+                        </details>
+                    </div>
                 </div>
             </div>
         </div>

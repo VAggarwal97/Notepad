@@ -1,377 +1,87 @@
-/* ------------------------
-   Global App Styles
------------------------- */
-.app {
+/* ===========================
+     GLOBAL APP LAYOUT
+=========================== */
+
+.app-container {
+  width: 100%;
+  /* min-height: 100%; */
   display: flex;
-  height: 100vh;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  flex-direction: column;
+
   background-color: #f5f5f5;
-  color: #333;
-  overflow: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
+  overflow-x: hidden; /* no horizontal scroll */
 }
 
-.app.dark-mode {
-  background-color: #1e1e1e;
-  color: #e0e0e0;
+/* Dark mode */
+.app-container.dark-mode {
+  background-color: #121212;
+  color: #eee;
 }
 
-/* ------------------------
-   Sidebar (Left)
------------------------- */
-.sidebar {
-  width: 240px; /* fixed sidebar width */
-  background-color: #ffffff;
-  border-right: 1px solid #ccc;
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-  overflow-y: auto;
-}
+/* ===========================
+     NAVBAR (NOT FIXED)
+=========================== */
 
-.app.dark-mode .sidebar {
-  background-color: #2b2b2b;
-  border-color: #444;
-}
-
-/* Sidebar Elements Common Width */
-.sidebar input,
-.sidebar button {
-  width: 100%; /* full width */
-  box-sizing: border-box;
-}
-
-/* Search Bar */
-.search-bar {
+.app-navbar {
+  height: 58px; /* Reduced height */
+  flex-shrink: 0;
+  position: relative;
   width: 100%;
-  margin-bottom: 10px;
+  z-index: 2;
 }
 
-.search-input {
-  height: 34px;
-  padding: 0 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 14px;
-  outline: none;
-  transition: all 0.2s ease;
-  background: #fff;
-  color: #333;
-}
+/* ===========================
+     MAIN PAGE CONTENT
+=========================== */
 
-.search-input:focus {
-  border-color: #6a5acd;
-  box-shadow: 0 0 4px rgba(106, 90, 205, 0.3);
-}
-
-.search-input.dark {
-  background: #2f2f2f;
-  border-color: #555;
-  color: #eee;
-}
-
-.search-input.dark::placeholder {
-  color: #bbb;
-}
-
-/* Folder List */
-.sidebar ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.sidebar ul li {
-  padding: 5px 0;
-  margin-bottom: 6px;
-  border-radius: 4px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-}
-
-.sidebar ul li.selected {
-  background-color: #d0e7ff;
-}
-
-.app.dark-mode .sidebar ul li.selected {
-  background-color: #7d7d7d;
-}
-
-/* Folder input inside li */
-.sidebar ul li input {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 4px 8px;
-  font-size: 14px;
-  width: 100%;
-  background: #fff;
-  color: #333;
-}
-
-.app.dark-mode .sidebar ul li input {
-  background: #2f2f2f;
-  border-color: #555;
-  color: #eee;
-}
-
-/* Sidebar Buttons */
-.sidebar button {
-  padding: 8px;
-  margin-bottom: 10px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: 600;
-}
-
-.sidebar button:hover {
-  background-color: #0056b3;
-}
-
-/* Content Search Input */
-.sidebar > div > input.input-textarea {
-  margin-top: 10px;
-  padding: 6px 8px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  font-size: 14px;
-  width: 100%; /* full width */
-  box-sizing: border-box;
-}
-
-.app.dark-mode .sidebar > div > input.input-textarea {
-  background: #2f2f2f;
-  border-color: #555;
-  color: #eee;
-}
-
-/* ----------------------------
-   Context Menu
----------------------------- */
-.context-menu-modal {
-  position: absolute;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  padding: 8px;
-  border-radius: 5px;
-  z-index: 1000;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-}
-
-.app.dark-mode .context-menu-modal {
-  background-color: #333;
-  border-color: #555;
-  color: #eee;
-}
-
-/* Sidebar Bottom Icons */
-.sidebar-bottom-left {
-  margin-top: auto;
-}
-
-.sidebar-icons {
-  display: flex;
-  flex-direction: column;
-  padding: 5px 0;
-}
-
-.sidebar-icons div {
-  cursor: pointer;
-  font-size: 18px;
-}
-
-/* ------------------------
-   Files Sidebar (Middle)
------------------------- */
-.files-sidebar {
-  width: 200px; /* Match main sidebar width */
-  border-right: 1px solid #ccc;
-  padding: 10px;
-  overflow-y: auto;
-  background-color: #f8f8f8;
-}
-
-.app.dark-mode .files-sidebar {
-  background-color: #262626;
-  border-color: #444;
-}
-
-/* New File Button */
-.new-file {
-  padding: 8px; /* same padding as sidebar buttons */
-  margin-bottom: 10px;
-  background-color: #007bff;
-  color: white;
-  text-align: center;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: 600;
-  width: 100%; /* full width */
-  box-sizing: border-box;
-}
-
-.new-file:hover {
-  background-color: #0056b3;
-}
-
-/* Files List */
-.filesidedown ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.filesidedown li {
-  padding: 6px 0;
-  margin-bottom: 10px;
-  border-radius: 5px;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column; /* stack input + buttons */
-  background-color: #fff;
-  width: 100%; /* full width */
-  box-sizing: border-box;
-}
-
-.app.dark-mode .filesidedown li {
-  background-color: #333;
-  color: #eee;
-}
-
-.filesidedown li.selected {
-  background-color: #cce5ff;
-}
-
-.app.dark-mode .filesidedown li.selected {
-  background-color: #4d4d4d;
-}
-
-/* File Name Input */
-.filesidedown li input {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 4px 8px;
-  font-size: 14px;
-  width: 100%;
-  background: #fff;
-  color: #333;
-  box-sizing: border-box;
-}
-
-.app.dark-mode .filesidedown li input {
-  background: #2f2f2f;
-  border-color: #555;
-  color: #eee;
-}
-
-/* File Action Buttons (TXT / MD / PDF / Del) */
-.file-actions-under {
-  margin-top: 4px;
-  display: flex;
-  gap: 4px;
-  flex-wrap: wrap;
-}
-
-.file-actions-under button {
-  padding: 4px 6px;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-  font-size: 12px;
-  flex: 1; /* buttons share width equally */
-}
-
-.file-actions-under button:hover {
-  opacity: 0.8;
-}
-
-/* ------------------------
-   Editor (Right)
------------------------- */
-.editor {
+.app-content {
   flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  padding: 16px;
+  width: 100%;
   height: 100%;
-  overflow: hidden;
+  overflow-y: auto; /* scrolling only inside content */
+  overflow-x: hidden;
+  /* padding: 10px 18px; */
+  box-sizing: border-box;
+  transition: background-color 0.3s ease;
 }
 
-.editor-container {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  min-height: 0;
+/* Light mode content */
+.app-content.light {
+  background-color: #fafafa;
 }
 
-.editor-container .ProseMirror {
-  flex-grow: 1;
-  min-height: 600px;
-  overflow-y: auto;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  background-color: #fff;
+/* Dark mode content */
+.app-content.dark {
+  background-color: #181818;
 }
 
-.app.dark-mode .editor-container .ProseMirror {
-  background-color: #2b2b2b;
-  color: #eee;
-  border-color: #555;
+/* ===========================
+     CUSTOM SCROLL BAR
+=========================== */
+
+.app-content::-webkit-scrollbar {
+  width: 8px;
 }
 
-/* ------------------------
-   Search Results
------------------------- */
-.search-results {
-  max-height: 150px;
-  overflow-y: auto;
-  margin-top: 4px;
+.app-content::-webkit-scrollbar-track {
+  background: transparent;
 }
 
-.search-result {
-  padding: 4px 6px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 13px;
+.app-content::-webkit-scrollbar-thumb {
+  background: #9a9a9a;
+  border-radius: 10px;
 }
 
-.search-result:hover {
-  background-color: #d0e7ff;
+.app-content::-webkit-scrollbar-thumb:hover {
+  background: #777;
 }
 
-.app.dark-mode .search-result:hover {
-  background-color: #3a5f7f;
-}
-
-/* ------------------------
-   Scrollbar Styling
------------------------- */ /* Hide default scrollbar */
-.files-sidebar::-webkit-scrollbar {
-  width: 8px; /* width of the scrollbar */
-}
-
-.files-sidebar::-webkit-scrollbar-track {
-  background: transparent; /* optional: transparent track */
-}
-
-.files-sidebar::-webkit-scrollbar-thumb {
-  background-color: #888; /* scrollbar color */
-  border-radius: 4px;
-}
-
-.files-sidebar::-webkit-scrollbar-thumb:hover {
-  background-color: #555;
-}
-
-/* Firefox */
-.files-sidebar {
-  scrollbar-width: none;
-  /* scrollbar-color: #888 transparent; */
-}
-.sidebar {
-  scrollbar-width: none;
-  /* scrollbar-color: #888 transparent; */
+/* For Firefox */
+.app-content {
+  scrollbar-width: thin;
+  scrollbar-color: #888 transparent;
 }

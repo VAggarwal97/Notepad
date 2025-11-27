@@ -1,0 +1,400 @@
+/* Home.css — updated for 0-gap full-width layout and hidden scrollbars */
+
+/* --- Reset / global box sizing --- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Make body/root flush with zero gaps */
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* hide global browser scrollbars */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ------------------------
+   Global App Styles
+------------------------ */
+.app {
+  display: flex;
+  height: 100vh; /* full viewport height */
+  width: 100vw; /* full viewport width — prevents side gaps */
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+  overflow: hidden; /* hide outer scrollbars */
+}
+
+/* dark mode base */
+.app.dark-mode {
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+}
+
+/* ------------------------
+   Sidebar (Left)
+   (scrollable internally, but scrollbar hidden visually)
+------------------------ */
+.sidebar {
+  width: 240px; /* fixed sidebar width */
+  background-color: #ffffff;
+  border-right: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  overflow: auto; /* allow internal scrolling */
+  -ms-overflow-style: none; /* IE/Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.sidebar::-webkit-scrollbar {
+  display: none;
+} /* Chrome, Safari, Opera */
+
+.app.dark-mode .sidebar {
+  background-color: #2b2b2b;
+  border-color: #444;
+}
+
+/* Sidebar Elements Common Width */
+.sidebar input,
+.sidebar button {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Search Bar */
+.search-bar {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+/* Search Input */
+.search-input {
+  height: 34px;
+  padding: 0 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.2s ease;
+  background: #fff;
+  color: #333;
+}
+.search-input:focus {
+  border-color: #6a5acd;
+  box-shadow: 0 0 4px rgba(106, 90, 205, 0.3);
+}
+.search-input.dark {
+  background: #2f2f2f;
+  border-color: #555;
+  color: #eee;
+}
+.search-input.dark::placeholder {
+  color: #bbb;
+}
+
+/* Folder List */
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.sidebar ul li {
+  padding: 5px 0;
+  margin-bottom: 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+.sidebar ul li.selected {
+  background-color: #d0e7ff;
+}
+.app.dark-mode .sidebar ul li.selected {
+  background-color: #7d7d7d;
+}
+
+/* Folder input inside li */
+.sidebar ul li input {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 4px 8px;
+  font-size: 14px;
+  width: 100%;
+  background: #fff;
+  color: #333;
+}
+.app.dark-mode .sidebar ul li input {
+  background: #2f2f2f;
+  border-color: #555;
+  color: #eee;
+}
+
+/* Sidebar Buttons */
+.sidebar button {
+  padding: 4px;
+  margin-bottom: 8px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.sidebar button:hover {
+  background-color: #3591f3;
+}
+
+/* Content Search Input */
+.sidebar > div > input.input-textarea {
+  margin-top: 10px;
+  padding: 6px 8px;
+  border-radius: 5px;
+  font-size: 14px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.app.dark-mode .sidebar > div > input.input-textarea {
+  background: #2f2f2f;
+  border-color: #555;
+  color: #eee;
+}
+
+/* Context Menu (absolute positioned) */
+.context-menu-modal {
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 8px;
+  border-radius: 5px;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+.app.dark-mode .context-menu-modal {
+  /* background-color: #333; */
+  border-color: #555;
+  color: #eee;
+}
+
+/* Sidebar Bottom Icons */
+.sidebar-bottom-left {
+  margin-top: auto;
+}
+.sidebar-icons {
+  display: flex;
+  flex-direction: column;
+  padding: 5px 0;
+  width: auto;
+}
+.sidebar-icons div {
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/* ------------------------
+   Files Sidebar (Middle)
+------------------------ */
+.files-sidebar {
+  width: 200px;
+  margin-top: 50px;
+  border-right: 1px solid #ccc;
+  padding: 5px;
+  overflow: auto; /* allow internal scrolling */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.files-sidebar::-webkit-scrollbar {
+  display: none;
+}
+
+.app.dark-mode .files-sidebar {
+  background-color: #262626;
+  border-color: #444;
+}
+
+/* New File Button */
+.new-file {
+  padding: 1px;
+  margin-bottom: 10px;
+  background-color: #0f83ff;
+  color: white;
+  text-align: center;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  width: 100%;
+  box-sizing: border-box;
+}
+.new-file:hover {
+  background-color: #0056b3;
+}
+
+/* Files List */
+.filesidedown ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.filesidedown li {
+  padding: 6px 0;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  width: 100%;
+  box-sizing: border-box;
+}
+.app.dark-mode .filesidedown li {
+  background-color: #333;
+  color: #eee;
+}
+.filesidedown li.selected {
+  background-color: #cce5ff;
+}
+.app.dark-mode .filesidedown li.selected {
+  background-color: #4d4d4d;
+}
+
+/* File Name Input */
+.filesidedown li input {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 4px 8px;
+  font-size: 14px;
+  width: 100%;
+  background: #fff;
+  color: #333;
+  box-sizing: border-box;
+}
+.app.dark-mode .filesidedown li input {
+  background: #2f2f2f;
+  border-color: #555;
+  color: #eee;
+}
+
+/* File Action Buttons */
+.file-actions-under {
+  margin-top: 4px;
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.file-actions-under button {
+  padding: 4px 6px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 12px;
+  flex: 1;
+}
+.file-actions-under button:hover {
+  opacity: 0.8;
+}
+
+/* ------------------------
+   Editor (Right)
+------------------------ */
+.editor {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  height: 100%;
+  overflow: hidden; /* prevent outer scroll */
+}
+
+/* ensure editor container shrinks correctly */
+.editor-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0; /* important to make internal scroll work */
+}
+
+/* ProseMirror area — allow vertical scroll but hide scrollbar */
+.editor-container .ProseMirror {
+  flex-grow: 1;
+  min-height: 0;
+  overflow: auto; /* allow internal scrolling */
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.editor-container .ProseMirror::-webkit-scrollbar {
+  display: none;
+}
+
+.app.dark-mode .editor-container .ProseMirror {
+  background-color: #2b2b2b;
+  color: #eee;
+  border-color: #555;
+}
+
+/* ------------------------
+   Search Results
+------------------------ */
+.search-results {
+  max-height: 150px;
+  overflow: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.search-results::-webkit-scrollbar {
+  display: none;
+}
+
+.search-result {
+  padding: 4px 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+}
+.search-result:hover {
+  background-color: #d0e7ff;
+}
+.app.dark-mode .search-result:hover {
+  background-color: #3a5f7f;
+}
+
+/* ------------------------
+   Small helpers
+------------------------ */
+/* Keep long content from overflowing horizontally */
+.app,
+.sidebar,
+.files-sidebar,
+.editor,
+.editor-container,
+.ProseMirror {
+  overflow-x: hidden;
+}
+
+/* Make inputs and buttons visually consistent */
+input,
+button,
+textarea {
+  font-family: inherit;
+}
+
+/* Context: avoid unexpected body scroll when modals open */
+.modal,
+.context-menu-modal {
+  max-width: 100%;
+}
+
+/* You can keep these utilities if you want to show native scrollbar again for debugging:
+   - remove the ::-webkit-scrollbar { display: none; } lines
+   - or set overflow: auto on html/body instead of hidden
+*/

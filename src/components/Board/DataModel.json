@@ -1,0 +1,32 @@
+{
+  "boardId": "default-board",
+  "name": "Design Sprint",
+  "columns": [
+    {
+      "id": "todo",
+      "title": "TO DO",
+      "cards": [
+        {
+          "id": "NHP-12",
+          "title": "Task title",
+          "desc": "Full description",
+          "priority": "high",
+          "dueDate": "2025-02-28",
+          "avatar": "/mnt/data/7c19....png",
+          "subtasks": [
+            { "id": 1, "text": "subtask 1", "done": false },
+            { "id": 2, "text": "subtask 2", "done": true }
+          ],
+          "comments": [
+            {
+              "id": 1,
+              "text": "Looks good!",
+              "by": "Vishal",
+              "time": 173345677
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

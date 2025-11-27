@@ -1,0 +1,157 @@
+/* ===========================
+   BOARD PAGE LAYOUT
+=========================== */
+.board-page {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 60px); /* minus navbar */
+  padding: 10px 16px;
+  overflow: hidden;
+}
+
+/* Search + Create row */
+.board-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  /* gap: 12px; */
+}
+
+.board-search {
+  width: 250px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #bfbfbf;
+  transition: 0.3s ease;
+}
+
+.dark-mode .board-search {
+  background: #333;
+  border-color: #555;
+  color: #eee;
+}
+
+/* ===========================
+   COLUMNS WRAPPER
+=========================== */
+
+.board-columns {
+  display: flex;
+  gap: 18px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  height: 100%;
+}
+
+/* hide default scrollbar */
+.board-columns::-webkit-scrollbar {
+  height: 6px;
+}
+.board-columns::-webkit-scrollbar-thumb {
+  background: #777;
+  border-radius: 10px;
+}
+
+/* ===========================
+   COLUMN CARD
+=========================== */
+.column {
+  flex: 0 0 280px;
+  background: #f4f4f4;
+  border-radius: 14px;
+  padding: 14px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dark-mode .column {
+  background: #1f1f1f;
+}
+
+.column-title {
+  font-weight: 600;
+  font-size: 15px;
+  padding-bottom: 6px;
+}
+
+/* ===========================
+   TASK CARD
+=========================== */
+.task-card {
+  background: white;
+  padding: 12px;
+  border-radius: 14px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+  cursor: grab;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.dark-mode .task-card {
+  background: #2c2c2c;
+  color: #eee;
+}
+
+.task-title {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.task-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.card-avatar {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+}
+
+/* ===========================
+   CREATE BUTTON
+=========================== */
+.new-task-btn {
+  background: #0ea5e9;
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-size: 14px;
+  transition: 0.3s ease;
+}
+
+.new-task-btn:hover {
+  background: #0284c7;
+}
+
+/* ===========================
+   MODAL
+=========================== */
+
+.modal-bg {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-box {
+  background: white;
+  padding: 20px;
+  width: 350px;
+  border-radius: 12px;
+}
+
+.dark-mode .modal-box {
+  background: #222;
+  color: #eee;
+}
